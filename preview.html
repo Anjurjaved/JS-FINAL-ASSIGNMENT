@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Data Preview</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/preview.css">
+</head>
+<body>
+  <div class="container">
+   
+  </div>
+  <div class="buttons">
+    <button id="back-button" class="btn btn-primary">Back to Index Page</button>
+    <button id="download-button" class="btn btn-success">Download Data as TXT</button>
+    <button id="download-doc-button" class="btn btn-warning">Download Data as DOC</button>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const userDataList = document.querySelector('.container');
+      const userData = JSON.parse(localStorage.getItem('userData')) || [];
+
+      userData.forEach((data, index) => {
+        const userCard = document.createElement('div');
+        userCard.classList.add('card');
+        userCard.innerHTML = `
+          <div class="card-header">User Data</div>
+          <div class="card-body">
+            <div class="product-item">
+              <div class="product-image">
+                <img id="photo-preview-${index}" src="${data.photo}" alt="User Photo">
+              </div>
+              <div class="product-details">
+                <h3>${data.fullName}</h3>
+                <p><strong>Email:</strong> ${data.email}</p>
+                <p><strong>Mobile Number:</strong> ${data.mobile}</p>
+                <p><strong>Date of Birth:</strong> ${data.dob}</p>
+                <p><strong>Gender:</strong> ${data.gender}</p>
+              </div>
+            </div>
+          </div>
+        `;
+        userDataList.appendChild(userCard);
+      });
+
+      // Back to Index Page Button
+      document.getElementById('back-button').addEventListener('click', function() {
+        window.location.href = 'index.html';
+      });
+
+      // Download Data as TXT Button
+      document.getElementById('download-button').addEventListener('click', function() {
+        const userDataTxt = userData.map(data => `
+          Full Name: ${data.fullName}
+          Email: ${data.email}
+          Mobile Number: ${data.mobile}
+          Date of Birth: ${data.dob}
+          Gender: ${data.gender}
+        `).join('\n\n');
+
+        const dataStr = "data:text/plain;charset=utf-8," + encodeURIComponent(userDataTxt);
+        const downloadAnchorNode = document.createElement('a');
+        downloadAnchorNode.setAttribute("href", dataStr);
+        downloadAnchorNode.setAttribute("download", "user_data.txt");
+        document.body.appendChild(downloadAnchorNode);
+        downloadAnchorNode.click();
+        downloadAnchorNode.remove();
+      });
+
+      // Download Data as DOC Button
+      document.getElementById('download-doc-button').addEventListener('click', function() {
+        let docContent = `
+          <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+          <head><title>User Data</title>
+          <style>
+            body { font-family: Arial, sans-serif; }
+            .card { border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); padding: 20px; margin-bottom: 20px; }
+            .card-header { background-color: #f8f8f8; padding: 10px; text-align: center; border-bottom: 1px solid #ddd; text-transform: uppercase; font-weight: bold; }
+            .card-body { display: flex; flex-direction: column; align-items: center; }
+            .product-image img { max-width: 100%; height: auto; border-radius: 5px; margin-bottom: 15px; }
+            .product-details { text-align: left; width: 100%; }
+            .product-details h3 { font-size: 1.2em; margin-bottom: 10px; color: #333; }
+            .product-details p { font-size: 0.9em; margin-bottom: 5px; color: #555; }
+          </style></head><body>
+        `;
+
+        userData.forEach((data) => {
+          docContent += `
+            <div class="card">
+              <div class="card-header">User Data</div>
+              <div class="card-body">
+                <div class="product-image">
+                  <img src="${data.photo}" alt="User Photo">
+                </div>
+                <div class="product-details">
+                  <h3>${data.fullName}</h3>
+                  <p><strong>Email:</strong> ${data.email}</p>
+                  <p><strong>Mobile Number:</strong> ${data.mobile}</p>
+                  <p><strong>Date of Birth:</strong> ${data.dob}</p>
+                  <p><strong>Gender:</strong> ${data.gender}</p>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+
+        docContent += `</body></html>`;
+
+        const blob = new Blob(['\ufeff', docContent], { type: 'application/msword' });
+        const url = URL.createObjectURL(blob);
+        const downloadAnchorNode = document.createElement('a');
+        downloadAnchorNode.href = url;
+        downloadAnchorNode.download = 'user_data.doc';
+        document.body.appendChild(downloadAnchorNode);
+        downloadAnchorNode.click();
+        downloadAnchorNode.remove();
+      });
+    });
+  </script>
+</body>
+</html>

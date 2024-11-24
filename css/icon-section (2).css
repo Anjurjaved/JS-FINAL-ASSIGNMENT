@@ -1,0 +1,28 @@
+.Lst {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .Lst div {
+    background-color: #EFF3F8; 
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 10vh;
+    margin-top: 10px;
+    float: right;
+    width: 90%;
+  }
+  
+
+  .next-button {
+    background-color: #007bff; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  

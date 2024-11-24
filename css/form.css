@@ -1,0 +1,73 @@
+
+.form-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid #d3e0ea;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  .form-header {
+    background-color: #e7f3fa;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    text-align: left;
+    border-bottom: 1px solid #d3e0ea;
+  }
+
+  .form-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+  }
+  .input-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .input-group label {
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+  }
+  .input-group label span {
+    color: red;
+    font-size: 14px;
+  }
+
+  .input-with-icon {
+    display: flex;
+    align-items: center;
+    position: relative;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+  .input-with-icon .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    color: #636363;
+    background-color: #EEEEEE;
+    
+  }
+  .input-with-icon input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background: transparent;
+  }
+  .input-with-icon input::placeholder {
+    color: #aaa;
+  }
+input:focus{
+  border:3px solid #F59942;
+}  

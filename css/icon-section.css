@@ -1,0 +1,55 @@
+.icon-section {
+    position: relative;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .line {
+    width: 60%;
+    height: 2px;
+    background-color: rgb(124, 124, 124);
+    border: none;
+    position: absolute;
+    z-index: 0;
+  }
+  .icon-container {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    position: absolute;
+    z-index: 1;
+  }
+  .icon-item {
+    position: relative;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+  }
+  .icon-item:hover {
+    transform: translateY(-10px);
+  }
+  .circle {
+    border: 2px solid #5BC0DE;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+  }
+  .circle i {
+    font-size: 1.5rem;
+    color: #5BC0DE;
+  }
+  .triangle {
+    width: 0;
+    height: 0;
+    border-left: 10px solid white;
+    border-right: 10px solid white;
+    border-bottom: 10px solid #5BC0DE;
+    position: relative;
+    margin: 0 auto; 
+    bottom: -90px;
+  }
+  
